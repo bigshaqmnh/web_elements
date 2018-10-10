@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  padding: 0;
+  border: none;
+	width: 100wh;
+	height: 90vh;
+	color: #fff;
+	background: linear-gradient(120deg, #e67e22, #16a085, #8e44ad, #27ae60, #e74c3c);
+	background-size: 2000% 1000%;
+	-webkit-animation: Gradient 20s linear infinite;
+	-moz-animation: Gradient 20s linear infinite;
+	animation: Gradient 10s linear infinite;
+}
+
+/* @-webkit-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+@-moz-keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+} */
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
+}
+
+p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #bdc3c7;
+  font-size: 2em;
+}
