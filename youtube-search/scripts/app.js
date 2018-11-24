@@ -28,15 +28,15 @@ class Video {
   }
 
   get title() {
-    return this._title;
+    return this._title.length > 75 ? this._title.slice(0, 70).concat('...') : this._title;
   }
 
   set description(value) {
-    this._description = value.slice(0, 120).concat('...');
+    this._description = value;
   }
 
   get description() {
-    return this._description;
+    return this._description.length > 120 ? this._description.slice(0, 120).concat('...') : this._description;
   }
 
   set author(value) {
@@ -146,6 +146,7 @@ const narrow = (width) => {
 	}
 };
 
+/* Function to control the ammount of video cards displayed */
 const windowControl = (width) => {
   width >= windowControl.prevWindowWidth ? expand(width) : narrow (width);
   windowControl.prevWindowWidth = width;
@@ -413,13 +414,15 @@ sliderControl.prevPage = 0;
 /* Function to control video cards and page switches content depending on page number */
 sliderWrapper.addEventListener('mouseup', (e) => sliderControl(e));
 
+/* Function to make a request if search keyword was entered and if it wasn't the same */
 const search = () => {
-  if (searchText.value) {
+  if (searchText.value && searchText.value !== search.prevKeyword) {
     makeRequest(true);
-  } else {
-    alert('Nothing was entered!');
+    search.prevKeyword = searchText.value;
   }
 };
+
+search.prevKeyword = '';
 
 /* Function to catch Enter key press */
 searchText.addEventListener('keyup', (e) => {
@@ -428,13 +431,9 @@ searchText.addEventListener('keyup', (e) => {
   }
 });
 
-/* Function to catch search button click */
-//searchBtn.addEventListener('mouseup', search);
-searchBtn.addEventListener('touchend', () => {
-  if (searchBox.dataset.minimized === 'true') {
-    search();
-  }
-});
+/* Functions to catch search button click */
+searchBtn.addEventListener('mouseup', (e) => search());
+searchBtn.addEventListener('touchend', (e) => search());
 
 /* Function to create page structure */
 const renderPage = () => {
