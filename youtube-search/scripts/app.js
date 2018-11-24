@@ -413,37 +413,24 @@ const sliderControl = (e) => {
 
 sliderControl.prevPage = 0;
 
-/* Function to catch Enter key press */
-searchText.addEventListener('keyup', (e) => {
-  if (e.keyCode === 13) {
-    if (e.target.value) {
-      makeRequest(true);
-    } else {
-      alert('Nothing was entered!');
-    }
-  }
-});
-
-const func = () => {
-  if (searchBox.dataset.minimized === 'true') {
-    if (searchText.value) {
-      makeRequest(true);
-    } else {
-      alert('Nothing was entered!');
-    }
+const search = () => {
+  if (searchText.value) {
+    makeRequest(true);
+  } else {
+    alert('Nothing was entered!');
   }
 };
 
+/* Function to catch Enter key press */
+searchText.addEventListener('keyup', (e) => {
+  if (e.keyCode === 13) {
+    search();
+  }
+});
+
 /* Function to catch search button click */
-searchBtn.addEventListener('mouseup', func);
-//searchBtn.addEventListener('touchend', func);
-  // if (searchBox.dataset.minimized === 'true') {
-  //   if (searchText.value) {
-  //     makeRequest(true);
-  //   } else {
-  //     alert('Nothing was entered!');
-  //   }
-  // }
+searchBtn.addEventListener('mouseup', search);
+searchBtn.addEventListener('touchend', search);
 
 /* Function to create page structure */
 const renderPage = () => {
