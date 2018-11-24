@@ -144,6 +144,11 @@ body .container .search-box .search-text {
   caret-color: #16a085;
   transition: 0.4s;
 }
+body .container .search-box .search-text:focus {
+  width: 220px;
+  padding: 0 6px;
+  cursor: text;
+}
 body .container .search-box .search-btn {
   width: 25px;
   height: 25px;
@@ -154,6 +159,7 @@ body .container .search-box .search-btn {
   background: #2c3e50;
   border: 3px #2c3e50 solid;
   border-radius: 50%;
+  user-select: none;
 }
 body .container .results-wrapper {
   width: 90vw;
@@ -165,6 +171,11 @@ body .container .results-wrapper {
 @media screen and (max-width: 600px) {
   body .container .results-wrapper {
     justify-content: center;
+  }
+}
+@media screen and (max-height: 600px) {
+  body .container .results-wrapper {
+    display: none;
   }
 }
 body .container .results-wrapper .result {
@@ -213,35 +224,41 @@ body .container .results-wrapper .result .vidDescription {
   text-align: justify;
   word-wrap: break-word;
 }
-body .container .results-wrapper .result .vidAuthor {
+body .container .results-wrapper .result .vidInfo {
+  justify-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body .container .results-wrapper .result .vidInfo .vidAuthor {
   display: flex;
   align-items: center;
   font-family: MediumItalic, sans-serif;
   color: #9c88ff;
 }
-body .container .results-wrapper .result .vidAuthor::before {
+body .container .results-wrapper .result .vidInfo .vidAuthor::before {
   content: url("../img/person.svg");
   margin-right: 5px;
 }
-body .container .results-wrapper .result .vidPublDate {
+body .container .results-wrapper .result .vidInfo .vidPublDate {
   display: flex;
   align-items: center;
   font-family: Bold, sans-serif;
   font-size: 0.9em;
   color: #16a085;
 }
-body .container .results-wrapper .result .vidPublDate::before {
+body .container .results-wrapper .result .vidInfo .vidPublDate::before {
   content: url("../img/calendar.svg");
   margin-right: 5px;
 }
-body .container .results-wrapper .result .vidViews {
+body .container .results-wrapper .result .vidInfo .vidViews {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
   font-family: MediumItalic, sans-serif;
   color: #16a085;
 }
-body .container .results-wrapper .result .vidViews::before {
+body .container .results-wrapper .result .vidInfo .vidViews::before {
   content: url("../img/eye.svg");
   margin-right: 5px;
 }
@@ -252,6 +269,11 @@ body .container .slider-wrapper {
   align-items: flex-end;
   justify-content: space-around;
   margin: 3% 0;
+}
+@media screen and (max-height: 600px) {
+  body .container .slider-wrapper {
+    display: none;
+  }
 }
 body .container .slider-wrapper .pageSwitch {
   width: 25px;
