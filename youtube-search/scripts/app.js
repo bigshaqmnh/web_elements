@@ -78,22 +78,28 @@ const searchBox = document.createElement('div');
 searchBox.classList.add('search-box');
 searchBox.dataset.minimized = 'true';
 
-/* Functions to expand search bar when hovered */
-searchBox.addEventListener('mouseover', () => {
-  searchBox.dataset.minimized = 'false';
-});
-
-/* Function to narrow search bar when mouse goes out */
-searchBox.addEventListener('mouseout', () => {
-  searchBox.dataset.minimized = 'true';
-});
-
 /* Input for text in search bar */
 const searchText = document.createElement('input');
 searchText.classList.add('search-text');
 searchText.type = 'search';
 searchText.placeholder = 'Type to search';
 searchText.maxLength = '50';
+
+/* Functions to narrow search bar when hovered */
+const minimize = () => {
+  searchBox.dataset.minimized = 'true';
+};
+
+/* Functions to expand search bar when hovered */
+const maximize = () => {
+  searchBox.dataset.minimized = 'false';
+};
+
+searchBox.addEventListener('mouseover', maximize);
+
+searchBox.addEventListener('mouseout', minimize);
+
+//searchText.addEventListener('change', minimize);
 
 /* Image that functions as a search button */
 const searchBtn = document.createElement('img');
@@ -191,24 +197,28 @@ const setContent = (from) => {
     description.classList.add('vidDescription');
     description.textContent = results[from].description;
 
+    const info = document.createElement('div');
+    info.classList.add('vidInfo');
+
     const author = document.createElement('p');
     author.classList.add('vidAuthor');
     author.textContent = results[from].author;
+    info.appendChild(author);
 
     const publDate = document.createElement('p');
     publDate.classList.add('vidPublDate');
     publDate.textContent = results[from].publicationDate;
+    info.appendChild(publDate);
 
     const views = document.createElement('p');
     views.classList.add('vidViews');
     views.textContent = results[from++].viewRate;
+    info.appendChild(views);
 
     result.appendChild(image);
     result.appendChild(title);
     result.appendChild(description);
-    result.appendChild(author);
-    result.appendChild(publDate);
-    result.appendChild(views);
+    result.appendChild(info);
   });
 };
 
@@ -408,6 +418,7 @@ const makeRequest = (isNew) => {
 searchText.addEventListener('keyup', (e) => {
   if (e.keyCode === 13) {
     if (e.target.value) {
+      minimize();
       makeRequest(true);
     } else {
       alert('Nothing was entered!');
@@ -417,8 +428,9 @@ searchText.addEventListener('keyup', (e) => {
 
 /* Function to catch search button click */
 searchBtn.addEventListener('mouseup', (e) => {
-  if (searchBox.dataset.minimized === 'true') {
-    if (e.target.value) {
+  if (searchBox.dataset.minimized === 'false') {
+    if (searchText.value) {
+      minimize();
       makeRequest(true);
     } else {
       alert('Nothing was entered!');
