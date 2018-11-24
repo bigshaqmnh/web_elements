@@ -431,7 +431,7 @@ searchText.addEventListener('keyup', (e) => {
 /* Function to catch search button click */
 //searchBtn.addEventListener('mouseup', search);
 searchBtn.addEventListener('touchend', () => {
-  if (searchBox.dataset.minimized === 'false') {
+  if (searchBox.dataset.minimized === 'true') {
     search();
   }
 });
