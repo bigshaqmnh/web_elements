@@ -180,7 +180,7 @@ const clearContent = () => {
 /* Function to set content to video cards */
 const setContent = (from) => {
   clearContent();
-  console.log('Ебошим контент!');
+  
   resultsWrapper.childNodes.forEach((result) => {
     const image = document.createElement('img');
     image.classList.add('vidImage');
@@ -301,7 +301,7 @@ const fillResults = (array) => {
 
       results.push(video);
     });
-    console.log('Результаты готовы!');
+    
     return Promise.resolve();
   }
 };
@@ -323,9 +323,6 @@ const slideRightAnim = () => {
   resultsWrapper.style.animation = 'slideRight 0.5s ease-in-out';
   setTimeout(() => resultsWrapper.style.animation = 'none', 500);
 };
-
-/* Function to control video cards and page switches content depending on page number */
-sliderWrapper.addEventListener('mouseup', (e) => sliderControl(e));
 
 /* Function to send http request */
 const sendRequest = (url, nextPage) => {
@@ -413,6 +410,9 @@ const sliderControl = (e) => {
 
 sliderControl.prevPage = 0;
 
+/* Function to control video cards and page switches content depending on page number */
+sliderWrapper.addEventListener('mouseup', (e) => sliderControl(e));
+
 const search = () => {
   if (searchText.value) {
     makeRequest(true);
@@ -430,7 +430,11 @@ searchText.addEventListener('keyup', (e) => {
 
 /* Function to catch search button click */
 searchBtn.addEventListener('mouseup', search);
-searchBtn.addEventListener('touchend', search);
+searchBtn.addEventListener('touchend', () => {
+  if (searchBox.dataset.minimized === 'false') {
+    search();
+  }
+});
 
 /* Function to create page structure */
 const renderPage = () => {
