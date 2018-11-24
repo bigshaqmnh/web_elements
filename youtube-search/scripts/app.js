@@ -99,8 +99,6 @@ searchBox.addEventListener('mouseover', maximize);
 
 searchBox.addEventListener('mouseout', minimize);
 
-//searchText.addEventListener('change', minimize);
-
 /* Image that functions as a search button */
 const searchBtn = document.createElement('img');
 searchBtn.classList.add('search-btn');
@@ -427,14 +425,15 @@ searchText.addEventListener('keyup', (e) => {
 });
 
 /* Function to catch search button click */
-searchBtn.addEventListener('mouseup', (e) => {
-  if (searchBox.dataset.minimized === 'true') {
-    if (searchText.value) {
-      makeRequest(true);
-    } else {
-      alert('Nothing was entered!');
-    }
-  }
+searchBtn.addEventListener('mouseup', () => {
+  makeRequest(true);
+  // if (searchBox.dataset.minimized === 'true') {
+  //   if (searchText.value) {
+  //     makeRequest(true);
+  //   } else {
+  //     alert('Nothing was entered!');
+  //   }
+  // }
 });
 
 /* Function to create page structure */
