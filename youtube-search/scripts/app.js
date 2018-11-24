@@ -182,7 +182,7 @@ const clearContent = () => {
 /* Function to set content to video cards */
 const setContent = (from) => {
   clearContent();
-
+  console.log('Ебошим контент!');
   resultsWrapper.childNodes.forEach((result) => {
     const image = document.createElement('img');
     image.classList.add('vidImage');
@@ -303,7 +303,7 @@ const fillResults = (array) => {
 
       results.push(video);
     });
-
+    console.log('Результаты готовы!');
     return Promise.resolve();
   }
 };
@@ -326,35 +326,6 @@ const slideRightAnim = () => {
   setTimeout(() => resultsWrapper.style.animation = 'none', 500);
 };
 
-/* Function to control page switches behaviour */
-const sliderControl = (e) => {
-  const pageNum = +e.target.dataset.pageNum;
-
-  if (pageNum * 4 + 4 === results.length) {
-    makeRequest(false, pageNum * 4)
-    .then(setContent(pageNum));
-    sliderControl.prevPage < pageNum ? slideLeftAnim() : slideRightAnim();
-  } else {
-    setContent(pageNum * 4);
-    if (sliderControl.prevPage !== pageNum) {
-      sliderControl.prevPage < pageNum ? slideLeftAnim() : slideRightAnim();
-    }
-  }
-
-  if (e.target === sliderWrapper.lastChild) {
-    updatePageSwithes('right');
-  }
-
-  if (e.target === sliderWrapper.firstChild && pageNum !== 0) {
-    updatePageSwithes('left');
-  }
-
-  makeChecked(pageNum);
-
-  sliderControl.prevPage = pageNum;
-};
-
-sliderControl.prevPage = 0;
 /* Function to control video cards and page switches content depending on page number */
 sliderWrapper.addEventListener('mouseup', (e) => sliderControl(e));
 
@@ -414,11 +385,40 @@ const makeRequest = (isNew) => {
   }
 };
 
+/* Function to control page switches behaviour */
+const sliderControl = (e) => {
+  const pageNum = +e.target.dataset.pageNum;
+
+  if (pageNum * 4 + 4 === results.length) {
+    makeRequest(false)
+    .then(setContent(pageNum));
+    sliderControl.prevPage < pageNum ? slideLeftAnim() : slideRightAnim();
+  } else {
+    setContent(pageNum * 4);
+    if (sliderControl.prevPage !== pageNum) {
+      sliderControl.prevPage < pageNum ? slideLeftAnim() : slideRightAnim();
+    }
+  }
+
+  if (e.target === sliderWrapper.lastChild) {
+    updatePageSwithes('right');
+  }
+
+  if (e.target === sliderWrapper.firstChild && pageNum !== 0) {
+    updatePageSwithes('left');
+  }
+
+  makeChecked(pageNum);
+
+  sliderControl.prevPage = pageNum;
+};
+
+sliderControl.prevPage = 0;
+
 /* Function to catch Enter key press */
 searchText.addEventListener('keyup', (e) => {
   if (e.keyCode === 13) {
     if (e.target.value) {
-      minimize();
       makeRequest(true);
     } else {
       alert('Nothing was entered!');
@@ -428,9 +428,8 @@ searchText.addEventListener('keyup', (e) => {
 
 /* Function to catch search button click */
 searchBtn.addEventListener('mouseup', (e) => {
-  if (searchBox.dataset.minimized === 'false') {
+  if (searchBox.dataset.minimized === 'true') {
     if (searchText.value) {
-      minimize();
       makeRequest(true);
     } else {
       alert('Nothing was entered!');
