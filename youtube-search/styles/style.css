@@ -173,7 +173,7 @@ body .container .results-wrapper {
     justify-content: center;
   }
 }
-@media screen and (max-height: 600px) {
+@media screen and (max-height: 550px) {
   body .container .results-wrapper {
     display: none;
   }
@@ -184,14 +184,14 @@ body .container .results-wrapper .result {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  position: relative;
   background: #2c3e50;
   border: 2px #9c88ff solid;
   border-radius: 10px;
 }
 @media screen and (max-width: 600px) {
   body .container .results-wrapper .result {
-    height: 350px;
+    max-height: 370px;
   }
 }
 body .container .results-wrapper .result[data-hidden=true] {
@@ -207,7 +207,7 @@ body .container .results-wrapper .result .vidImage {
   border-top-left-radius: 7px;
 }
 body .container .results-wrapper .result .vidTitle {
-  margin: 10px 10px 0 10px;
+  margin: 10px;
   font-family: Bold, sans-serif;
   color: #16a085;
   text-decoration: none;
@@ -217,18 +217,19 @@ body .container .results-wrapper .result .vidTitle:hover {
 }
 body .container .results-wrapper .result .vidDescription {
   max-width: 220px;
-  max-height: 50%;
   font-family: Medium, sans-serif;
   font-size: 0.9em;
   color: #ecf0f1;
-  text-align: justify;
   word-wrap: break-word;
+  text-align: justify;
 }
 body .container .results-wrapper .result .vidInfo {
-  justify-self: flex-end;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  bottom: 10px;
+  line-height: 20px;
 }
 body .container .results-wrapper .result .vidInfo .vidAuthor {
   display: flex;
@@ -249,12 +250,11 @@ body .container .results-wrapper .result .vidInfo .vidPublDate {
 }
 body .container .results-wrapper .result .vidInfo .vidPublDate::before {
   content: url("../img/calendar.svg");
-  margin-right: 5px;
+  margin-right: 6px;
 }
 body .container .results-wrapper .result .vidInfo .vidViews {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
   font-family: MediumItalic, sans-serif;
   color: #16a085;
 }
@@ -270,7 +270,7 @@ body .container .slider-wrapper {
   justify-content: space-around;
   margin: 3% 0;
 }
-@media screen and (max-height: 600px) {
+@media screen and (max-height: 550px) {
   body .container .slider-wrapper {
     display: none;
   }
@@ -295,5 +295,3 @@ body .container .slider-wrapper .pageSwitch:hover {
 body .container .slider-wrapper .checked {
   background: #16a085;
 }
-
-/*# sourceMappingURL=style.css.map */
