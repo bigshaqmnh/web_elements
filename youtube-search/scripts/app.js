@@ -424,9 +424,19 @@ searchText.addEventListener('keyup', (e) => {
   }
 });
 
+const func = () => {
+  if (searchBox.dataset.minimized === 'true') {
+    if (searchText.value) {
+      makeRequest(true);
+    } else {
+      alert('Nothing was entered!');
+    }
+  }
+};
+
 /* Function to catch search button click */
-searchBtn.addEventListener('mouseup', () => {
-  makeRequest(true);
+searchBtn.addEventListener('mouseup', func);
+searchBtn.addEventListener('touchend', func);
   // if (searchBox.dataset.minimized === 'true') {
   //   if (searchText.value) {
   //     makeRequest(true);
@@ -434,7 +444,6 @@ searchBtn.addEventListener('mouseup', () => {
   //     alert('Nothing was entered!');
   //   }
   // }
-});
 
 /* Function to create page structure */
 const renderPage = () => {
