@@ -436,7 +436,7 @@ const func = () => {
 
 /* Function to catch search button click */
 searchBtn.addEventListener('mouseup', func);
-searchBtn.addEventListener('touchend', func);
+//searchBtn.addEventListener('touchend', func);
   // if (searchBox.dataset.minimized === 'true') {
   //   if (searchText.value) {
   //     makeRequest(true);
