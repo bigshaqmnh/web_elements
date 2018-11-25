@@ -81,7 +81,7 @@ searchBox.dataset.minimized = 'true';
 /* Input for text in search bar */
 const searchText = document.createElement('input');
 searchText.classList.add('search-text');
-searchText.type = 'search';
+searchText.type = 'text';
 searchText.placeholder = 'Type to search';
 searchText.maxLength = '50';
 
@@ -181,7 +181,7 @@ const clearContent = () => {
 /* Function to set content to video cards */
 const setContent = (from) => {
   clearContent();
-  
+
   resultsWrapper.childNodes.forEach((result) => {
     const image = document.createElement('img');
     image.classList.add('vidImage');
@@ -302,7 +302,7 @@ const fillResults = (array) => {
 
       results.push(video);
     });
-    
+
     return Promise.resolve();
   }
 };
@@ -356,7 +356,7 @@ const sendRequest = (url, nextPage) => {
 sendRequest.pageToken = '';
 
 /* Function to make request and call necessary functions depending on isNew option */
-const makeRequest = (isNew) => {
+const makeRequest = (isNew, pageNum) => {
   const idsRequestUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&type=video&part=snippet&maxResults=16&fields=nextPageToken,items(id(videoId))&q=${searchText.value}`;
 
   if (isNew) {
@@ -386,8 +386,8 @@ const sliderControl = (e) => {
   const pageNum = +e.target.dataset.pageNum;
 
   if (pageNum * 4 + 4 === results.length) {
-    makeRequest(false)
-    .then(setContent(pageNum));
+    makeRequest(false, pageNum)
+    .then(setContent(pageNum * 4));
     sliderControl.prevPage < pageNum ? slideLeftAnim() : slideRightAnim();
   } else {
     setContent(pageNum * 4);
